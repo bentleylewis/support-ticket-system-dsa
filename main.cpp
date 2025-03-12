@@ -56,24 +56,54 @@ public:
             return;
         }
     // temp pointer to same mem location as head; both point to front node
-    Node* temp = head;
+        Node* temp = head;
     
     //print ticket details
-    cout << "Serving Ticket: Ticket ID: " << temp->id
-        << ", Customer name: " << temp ->name
-        << ", Issue: " << temp->issue << std::endl;
+        cout << "Serving Ticket: Ticket ID: " << temp->id
+             << ", Customer name: " << temp ->name
+             << ", Issue: " << temp->issue << std::endl;
 
 
     //move head to next node
-    head = head->next;
+        head = head->next;
 
     //check case for queue becoming empty
-    if (head == nullptr) {
-        tail = nullptr;
-    }
+        if (head == nullptr) {
+            tail = nullptr;
+        }
 
     //delete old front node (for memory)
-    delete temp;
+        delete temp;
+
+    }
+    //method for viewing top ticket
+    void peek() {
+        if (head == nullptr) {
+            cout<<"Queue is empty. No ticket to be viewed." << endl;
+            return;
+        }
+        else{
+            cout << "Serving Ticket: Ticket ID: " << head->id
+                 << ", Customer name: " << head ->name
+                 << ", Issue: " << head->issue << std::endl;
+        }
+
+    }
+
+    //method for displaying all tickets
+    void displayAll(){
+        Node* temp = head;
+
+        //check for empty queue
+        if (temp == nullptr)
+            cout << "Queue is empty. No tickets to display."
+        while (temp != nullptr){
+            cout << "Serving Ticket: Ticket ID: " << temp->id
+                 << ", Customer name: " << temp ->name
+                 << ", Issue: " << temp->issue << std::endl;
+            temp = temp->next; //continue to next ticket
+        }
+
 
     }
 
