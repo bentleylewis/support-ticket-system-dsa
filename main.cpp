@@ -30,10 +30,12 @@ public:
         tail = nullptr;
     }
     
-//method to enqueue ticket
+    //method to enqueue ticket
     void enqueue(int id, string name, string issue) {
+
     //declares pointer NewNode of type Node*
     //newNode now points to mem location where Node object stored
+    
         Node* newNode = new Node (id, name, issue); 
 
         //If queue empty, both head and tail point to new node
@@ -45,6 +47,34 @@ public:
             tail->next = newNode;
             tail = newNode;
         }
+    }
+
+    //method for dequeue
+    void dequeue(){
+        if (head = nullptr) {
+            cout<<"Queue is empty. No tickets to be served" << endl;
+            return;
+        }
+    // temp pointer to same mem location as head; both point to front node
+    Node* temp = head;
+    
+    //print ticket details
+    cout << "Serving Ticket: Ticket ID: " << temp->id
+        << ", Customer name: " << temp ->name
+        << ", Issue: " << temp->issue << std::endl;
+
+
+    //move head to next node
+    head = head->next;
+
+    //check case for queue becoming empty
+    if (head == nullptr) {
+        tail = nullptr;
+    }
+
+    //delete old front node (for memory)
+    delete temp;
+
     }
 
 };
