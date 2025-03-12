@@ -1,8 +1,58 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-//Define a Node class
 
+int main(){
+    supportQueue queue;
+    int choice;
+
+    do {
+        cout << "\n--- Customer Support Ticket System ---\n";
+        cout << "1. Add a Ticket (Enqueue)\n";
+        cout << "2. Serve a Ticket (Dequeue)\n";
+        cout << "3. View Next Ticket (Peek)\n";
+        cout << "4. Display All Tickets\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+ 
+        if (choice == 1) {
+            int id;
+            string name, issue;
+            cout << "Enter Ticket ID: ";
+            cin >> id;
+            cin.ignore();
+            cout << "Enter Customer Name: ";
+            getline(cin, name);
+            cout << "Enter Issue Description: ";
+            getline(cin, issue);
+
+            queue.enqueue(id, name, issue);
+            cout << "Ticket added successfully!\n";
+        } 
+        else if (choice == 2) {
+            queue.dequeue();
+        } 
+        else if (choice == 3) {
+            queue.peek();
+        } 
+        else if (choice == 4) {
+            queue.displayAll();
+        } 
+        else if (choice == 5) {
+            cout << "Exiting program.\n";
+        } 
+        else {
+            cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 5);
+
+    return 0;
+}
+
+
+//Define a Node class
 class Node {
 public:
     int id;
@@ -20,7 +70,7 @@ public:
 };
 
 //Define Queue class
-class Queue {
+class supportQueue {
 public:
     Node* head; //front of queue
     Node* tail; //back of queue
