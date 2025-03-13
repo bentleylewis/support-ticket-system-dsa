@@ -25,7 +25,7 @@ public:
     Node* head; //front of queue
     Node* tail; //back of queue
 
-    Queue() { //initialize head and tail pointer; empty queue
+    supportQueue() { //initialize head and tail pointer; empty queue
         head = nullptr; 
         tail = nullptr;
     }
@@ -96,7 +96,7 @@ public:
 
         //check for empty queue
         if (temp == nullptr)
-            cout << "Queue is empty. No tickets to display."
+            cout << "Queue is empty. No tickets to display.";
         while (temp != nullptr){
             cout << "Serving Ticket: Ticket ID: " << temp->id
                  << ", Customer name: " << temp ->name
