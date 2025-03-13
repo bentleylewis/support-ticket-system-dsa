@@ -1,8 +1,8 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 //Define a Node class
-
 class Node {
 public:
     int id;
@@ -20,7 +20,7 @@ public:
 };
 
 //Define Queue class
-class Queue {
+class supportQueue {
 public:
     Node* head; //front of queue
     Node* tail; //back of queue
@@ -56,25 +56,103 @@ public:
             return;
         }
     // temp pointer to same mem location as head; both point to front node
-    Node* temp = head;
+        Node* temp = head;
     
     //print ticket details
-    cout << "Serving Ticket: Ticket ID: " << temp->id
-        << ", Customer name: " << temp ->name
-        << ", Issue: " << temp->issue << std::endl;
+        cout << "Serving Ticket: Ticket ID: " << temp->id
+             << ", Customer name: " << temp ->name
+             << ", Issue: " << temp->issue << std::endl;
 
 
     //move head to next node
-    head = head->next;
+        head = head->next;
 
     //check case for queue becoming empty
-    if (head == nullptr) {
-        tail = nullptr;
-    }
+        if (head == nullptr) {
+            tail = nullptr;
+        }
 
     //delete old front node (for memory)
-    delete temp;
+        delete temp;
+
+    }
+    //method for viewing top ticket
+    void peek() {
+        if (head == nullptr) {
+            cout<<"Queue is empty. No ticket to be viewed." << endl;
+            return;
+        }
+        else{
+            cout << "Serving Ticket: Ticket ID: " << head->id
+                 << ", Customer name: " << head ->name
+                 << ", Issue: " << head->issue << std::endl;
+        }
+
+    }
+
+    //method for displaying all tickets
+    void displayAll(){
+        Node* temp = head;
+
+        //check for empty queue
+        if (temp == nullptr)
+            cout << "Queue is empty. No tickets to display."
+        while (temp != nullptr){
+            cout << "Serving Ticket: Ticket ID: " << temp->id
+                 << ", Customer name: " << temp ->name
+                 << ", Issue: " << temp->issue << std::endl;
+            temp = temp->next; //continue to next ticket
+        }
+
 
     }
 
 };
+
+int main(){
+    supportQueue queue;
+    int choice;
+
+    do {
+        cout << "\n--- Customer Support Ticket System ---\n";
+        cout << "1. Add a Ticket (Enqueue)\n";
+        cout << "2. Serve a Ticket (Dequeue)\n";
+        cout << "3. View Next Ticket (Peek)\n";
+        cout << "4. Display All Tickets\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+ 
+        if (choice == 1) {
+            int id;
+            string name, issue;
+            cout << "Enter Ticket ID: ";
+            cin >> id;
+            cin.ignore();
+            cout << "Enter Customer Name: ";
+            getline(cin, name);
+            cout << "Enter Issue Description: ";
+            getline(cin, issue);
+
+            queue.enqueue(id, name, issue);
+            cout << "Ticket added successfully!\n";
+        } 
+        else if (choice == 2) {
+            queue.dequeue();
+        } 
+        else if (choice == 3) {
+            queue.peek();
+        } 
+        else if (choice == 4) {
+            queue.displayAll();
+        } 
+        else if (choice == 5) {
+            cout << "Exiting program.\n";
+        } 
+        else {
+            cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 5);
+
+    return 0;
+}
