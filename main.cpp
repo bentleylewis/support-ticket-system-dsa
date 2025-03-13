@@ -51,7 +51,7 @@ public:
 
     //method for dequeue
     void dequeue(){
-        if (head = nullptr) {
+        if (head == nullptr) {
             cout<<"Queue is empty. No tickets to be served" << endl;
             return;
         }
