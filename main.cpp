@@ -30,39 +30,57 @@ public:
         tail = nullptr;
     }
     
+
+    //Destructor to free allocated memory to prevent memory leaks
+    ~supportQueue() {
+        while (head != nullptr) {
+            Node* temp = head;
+            head = head->next;
+            delete temp; //This frees memory of each node
+        }
+        tail = nullptr;
+    }
+    
+
+
     //method to enqueue ticket
+
     void enqueue(int id, string name, string issue) {
 
-    //declares pointer NewNode of type Node*
-    //newNode now points to mem location where Node object stored
+        
+        //newNode now points to mem location where Node object stored
     
         Node* newNode = new Node (id, name, issue); 
+
 
         //If queue empty, both head and tail point to new node
         if (tail == nullptr) {
             head = tail = newNode;
         }
+
         else{
             //If queue isn't empty add new node at tail and update
             tail->next = newNode;
             tail = newNode;
         }
+
     }
 
     //method for dequeue
     void dequeue(){
+
         if (head == nullptr) {
-            cout<<"Queue is empty. No tickets to be served" << endl;
+            cout<<"Queue is empty. No tickets to be served." << endl;
             return;
         }
+
     // temp pointer to same mem location as head; both point to front node
         Node* temp = head;
     
     //print ticket details
         cout << "Serving Ticket: Ticket ID: " << temp->id
              << ", Customer name: " << temp ->name
-             << ", Issue: " << temp->issue << std::endl;
-
+             << ", Issue: " << temp->issue << endl;
 
     //move head to next node
         head = head->next;
@@ -76,31 +94,38 @@ public:
         delete temp;
 
     }
+
     //method for viewing top ticket
     void peek() {
+
         if (head == nullptr) {
             cout<<"Queue is empty. No ticket to be viewed." << endl;
             return;
         }
         else{
-            cout << "Serving Ticket: Ticket ID: " << head->id
+            cout << "Next ticket to be Served: Ticket ID: " << head->id
                  << ", Customer name: " << head ->name
-                 << ", Issue: " << head->issue << std::endl;
+                 << ", Issue: " << head->issue << endl;
         }
 
     }
 
     //method for displaying all tickets
     void displayAll(){
+
         Node* temp = head;
+        cout << "All Pending Tickets: \n";
 
         //check for empty queue
-        if (temp == nullptr)
-            cout << "Queue is empty. No tickets to display.";
+        if (temp == nullptr){
+            cout << "Queue is empty. No tickets to display." <<endl;
+            return;
+        }
+
         while (temp != nullptr){
-            cout << "Serving Ticket: Ticket ID: " << temp->id
+            cout << "Ticket ID: " << temp->id
                  << ", Customer name: " << temp ->name
-                 << ", Issue: " << temp->issue << std::endl;
+                 << ", Issue: " << temp->issue << endl;
             temp = temp->next; //continue to next ticket
         }
 
